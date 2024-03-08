@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.rapidark.dubbo3nacos</groupId>
+        <artifactId>rapidark-os-apps</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>rapidark-resource</artifactId>
+
+    <description>
+        rapidark-resource资源服务
+    </description>
+
+    <dependencies>
+
+        <!-- SpringCloud Alibaba Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- SpringCloud Alibaba Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Mysql驱动包 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alipay.sofa.koupleless</groupId>
+            <artifactId>koupleless-app-starter</artifactId>
+            <version>${koupleless.runtime.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-actuator</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.rapidark.dubbo3nacos</groupId>
+            <artifactId>rapidark-api-resource</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.rapidark.dubbo3nacos</groupId>
+            <artifactId>rapidark-common-dubbo</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--这里添加ark 打包插件-->
+            <plugin>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-ark-maven-plugin</artifactId>
+                <version>${sofa.ark.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipArkExecutable>true</skipArkExecutable>
+                    <outputDirectory>./target</outputDirectory>
+                    <bizName>${project.artifactId}</bizName>
+                    <webContextPath>/resource</webContextPath>
+                    <declaredMode>true</declaredMode>
+                </configuration>
+            </plugin>
+            <!--  构建出普通 SpringBoot fatjar，支持独立部署时使用，如果不需要可以删除  -->
+
+        </plugins>
+    </build>
+</project>
